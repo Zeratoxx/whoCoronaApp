@@ -40,6 +40,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:background="#00000000"
+        android:onClick="onClickWhatsApp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
