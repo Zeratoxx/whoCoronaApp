@@ -36,13 +36,15 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
+        android:background="#00000000"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:srcCompat="@drawable/corona" />
 
     <ImageView
         android:id="@+id/imageView"
