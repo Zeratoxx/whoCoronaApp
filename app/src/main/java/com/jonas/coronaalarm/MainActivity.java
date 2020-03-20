@@ -14,9 +14,13 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -29,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        ImageView gifImageView = findViewById(R.id.imageView2);
+
+        Glide.with(this)
+                .load(R.drawable.blink)
+                .into(gifImageView);
     }
 
     public void onClickWhatsApp(View view) {
