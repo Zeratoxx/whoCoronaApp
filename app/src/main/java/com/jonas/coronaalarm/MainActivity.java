@@ -16,14 +16,20 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageView imageButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        setup();
+    }
 
-        ImageView imageButton = findViewById(R.id.imageButton);
+    public void setup(){
+        imageButton = findViewById(R.id.imageButton);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         Glide.with(this)
                 .load(R.drawable.corona)
