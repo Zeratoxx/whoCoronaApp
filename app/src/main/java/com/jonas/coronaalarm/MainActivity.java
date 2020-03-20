@@ -1,28 +1,17 @@
 package com.jonas.coronaalarm;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        ImageView gifImageView = findViewById(R.id.imageView2);
+        ImageView imageButton = findViewById(R.id.imageButton);
 
         Glide.with(this)
-                .load(R.drawable.blink)
-                .into(gifImageView);
+                .load(R.drawable.corona)
+                .into(imageButton);
     }
 
     public void onClickWhatsApp(View view) {
