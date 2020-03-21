@@ -16,6 +16,19 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String warningMessage = "*Automatisierte Warnnachricht* \n"+
+            "\n"+
+            "Hallo, ich wurde positiv auf das COVID-19-Virus getestet. Falls wir beide innerhalb der letzten zwei Wochen engen Kontakt zueinander hatten, bist auch du verpflichtet, dich in eine 14-tägige Quarantäne zu begeben (siehe www.rki.de/SharedDocs/FAQ/NCOV2019/FAQ_Liste.html). Als enger Kontakt zählen Anhusten, Anniesen oder auch schon ein mehrminütiges Gespräch.\n"+
+            "Sollten wir uns ausschließlich im gleichen Raum befunden haben, bist du zu einer Quarantäne nicht verpflichtet. [Stand 17.03.2020]\n"+
+            "\n"+
+            "Bitte achte in den nächsten 14 Tagen besonders auf mögliche Symtome wie Fieber, Husten und Kurzatmigkeit. Auch Durchfall und Kopfschmerzen können ein Indikator sein. Bitte halte dich in diesem Zeitraum besonders an die Abstandsregeln und verkehre mit so wenigen Menschen wie möglich, um eine Weitergabe zu verhindern. Solltest du Krankheitssymtome bemerken, gehe bitte nicht zum Arzt sondern melde dich telefonisch an. Sollte dein Arzt nicht zu erreichen sein, hilft der ärztliche Bereitschaftsdienst 116117 weiter. \n"+
+            "\n"+
+            "_Zusätzliche Hinweise des lokalen Testinstituts:_\n"+
+            "Die Teststation im darmstädter Klinikum wird ab nächster Woche nur noch bis 13:00 Uhr geöffnet haben, da es sonst zu Personalengpässen in der Pflege kommen kann (weitere Informationen unter _linkToKlinikumDarmstadt_).\n"+
+            "\n"+
+            "\n"+
+            "*Diese Nachricht wurde von “CallMyContacts - Corona Warnnachricht” verschickt*\n";
+
     ImageView imageButton;
 
     @Override
@@ -42,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             Intent waIntent = new Intent(Intent.ACTION_SEND);
             waIntent.setType("text/plain");
-            String text = "MEMES CURED MY CORONA";
+            String text = warningMessage;
 
             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
             waIntent.setPackage("com.whatsapp");
