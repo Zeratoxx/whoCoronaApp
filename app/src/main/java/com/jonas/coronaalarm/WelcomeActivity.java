@@ -41,6 +41,8 @@ public class WelcomeActivity extends AppCompatActivity {
     TextInputEditText inputCode;
     Button submitCode;
 
+    Boolean demo = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,26 +70,41 @@ public class WelcomeActivity extends AppCompatActivity {
 
         if (!Objects.requireNonNull(inputCode.getText()).toString().equals("")){
 
-            String serverIP = "192.168.178.64:8080";
-            String code = Objects.requireNonNull(inputCode.getText()).toString();
+            if (demo) {
+                String text = Objects.requireNonNull(inputCode.getText()).toString();
 
-            AndroidNetworking.post("http://" + serverIP + "/access_request")
-                    .addBodyParameter("access_code", code)
-                    .setPriority(Priority.HIGH)
-                    .build()
-                    .getAsString(new StringRequestListener() {
-                        @Override
-                        public void onResponse(String response) {
-                            //prefs.edit().putBoolean("keysubmitted", true).apply();
-                            Toast.makeText(WelcomeActivity.this, "Okay", Toast.LENGTH_SHORT).show();
-                            Intent myIntent = new Intent(WelcomeActivity.this, MainActivity.class);
-                            WelcomeActivity.this.startActivity(myIntent);
-                        }
-                        @Override
-                        public void onError(ANError error) {
-                            Toast.makeText(WelcomeActivity.this, "Dieser Access Code ist nicht gültig", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                if (text.equals("617254")){
+                    prefs.edit().putBoolean("codeOkay", true).apply();
+                    Toast.makeText(WelcomeActivity.this, "Okay", Toast.LENGTH_SHORT).show();
+                    Intent myIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+                    WelcomeActivity.this.startActivity(myIntent);
+                } else {
+                    Toast.makeText(WelcomeActivity.this, "Dieser Access Code ist nicht gültig", Toast.LENGTH_SHORT).show();
+                }
+
+            } else {
+                String serverIP = "192.168.178.64:8080";
+                String code = Objects.requireNonNull(inputCode.getText()).toString();
+
+                AndroidNetworking.post("http://" + serverIP + "/access_request")
+                        .addBodyParameter("access_code", code)
+                        .setPriority(Priority.HIGH)
+                        .build()
+                        .getAsString(new StringRequestListener() {
+                            @Override
+                            public void onResponse(String response) {
+                                prefs.edit().putBoolean("codeOkay", true).apply();
+
+                                Toast.makeText(WelcomeActivity.this, "Okay", Toast.LENGTH_SHORT).show();
+                                Intent myIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+                                WelcomeActivity.this.startActivity(myIntent);
+                            }
+                            @Override
+                            public void onError(ANError error) {
+                                Toast.makeText(WelcomeActivity.this, "Dieser Access Code ist nicht gültig", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }
     }
 }

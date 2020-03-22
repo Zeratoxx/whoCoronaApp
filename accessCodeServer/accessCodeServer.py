@@ -93,6 +93,7 @@ def store_new_code(access_code, content):
 
 
 def get_access_code_entry(access_code):
+    print(access_code)
     xml_code_list = ET.parse('accessCodes.xml')
     root_node = xml_code_list.getroot()
     access_code_node = root_node.find('tag_' + access_code)

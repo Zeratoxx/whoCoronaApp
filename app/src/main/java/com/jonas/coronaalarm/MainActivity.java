@@ -44,10 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("com.jonas.coronaalarm", MODE_PRIVATE);
 
-        //if (prefs.getBoolean("firstrun", true) || prefs.getBoolean("keysubmitted", false)) {
-        if (prefs.getBoolean("firstrun", true)) {
-            prefs.edit().putBoolean("firstrun", false).apply();
+        boolean needInputCode = false;
 
+        if (!prefs.contains("codeOkay")){
+            needInputCode = true;
+        }
+
+        if (needInputCode) {
             Intent myIntent = new Intent(MainActivity.this, WelcomeActivity.class);
             MainActivity.this.startActivity(myIntent);
         } 
