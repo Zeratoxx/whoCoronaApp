@@ -6,42 +6,12 @@
 </head>
 <body>
     Hier werden die Codes vergeben.<br><br>
-<!--    <form action="perform_code_request()" method="post">-->
-<!--        <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="Hinweise hinzufügen..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>-->
-<!--        <input type="submit" value="Generiere Zugangscode">-->
-<!--    </form>-->
-    <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="In diesem Feld können Hinweise bezüglich der lokalen Umstände gegeben werden ..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>
-    <button onclick="perform_code_request()">Generiere Zugangscode</button><br>
+    <form action="/" method="post">
+        <label for="warningMessage">Zusätzliche Hinweise</label><br>
+            <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="In diesem Feld können Hinweise bezüglich der lokalen Umstände angegeben werden ..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>
+        <input type="submit" value="Generiere Zugangscode">
+    </form>
+
     <p id="accessCode"></p>
 </body>
-<script>
-    function perform_code_request(){
-
-        let content = document.getElementById("warningMessage").value;
-
-        var Http = new XMLHttpRequest();
-        Http.open("POST", "http://localhost:8080/index.html", true);
-        Http.send("<request type='accessCode'>" + content + "</request>");
-
-        let response_text = undefined;
-        let xmlDoc = undefined;
-        Http.onreadystatechange = function(){
-            if(Http.readyState === 4){
-                response_text = Http.responseText;
-                if (window.DOMParser) {
-                    let parser = new DOMParser();
-                    xmlDoc = parser.parseFromString(response_text, "text/xml");
-                }
-                else { // Internet Explorer
-                    let xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-                    xmlDoc.async = false;
-                    xmlDoc.loadXML(response_text);
-                }
-
-                let accessCodeText = document.getElementById("accessCode");
-                accessCodeText.innerText = xmlDoc.firstChild.textContent;
-            }
-        };
-    }
-</script>
 </html>
