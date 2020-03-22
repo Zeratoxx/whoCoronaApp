@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import random
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import xml.etree.ElementTree as ET
