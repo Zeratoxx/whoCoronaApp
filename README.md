@@ -8,4 +8,4 @@
 
 1. accessCodeServer/run_server.bat bearbeiten
 2. eigene IPv4 Adresse für die Variable ipv4_address hinterlegen
-3. speichern & starten 
+3. run_server.bat speichern & ausführen 
