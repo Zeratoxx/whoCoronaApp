@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/coronaWeiß" />
+        app:srcCompat="@drawable/coronaweiss" />
 
     <TextView
         android:id="@+id/textView2"
