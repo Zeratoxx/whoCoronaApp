@@ -10,7 +10,7 @@
 <!--        <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="Hinweise hinzufügen..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>-->
 <!--        <input type="submit" value="Generiere Zugangscode">-->
 <!--    </form>-->
-    <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="Hinweise hinzufügen..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>
+    <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="In diesem Feld können Hinweise bezüglich der lokalen Umstände gegeben werden ..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>
     <button onclick="perform_code_request()">Generiere Zugangscode</button><br>
     <p id="accessCode"></p>
 </body>
@@ -38,8 +38,8 @@
                     xmlDoc.loadXML(response_text);
                 }
 
-                document.getElementById("accessCode").value = xmlDoc.value;
-                // let xml_favourite_list = xmlDoc.firstChild;
+                let accessCodeText = document.getElementById("accessCode");
+                accessCodeText.innerText = xmlDoc.firstChild.textContent;
             }
         };
     }
