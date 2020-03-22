@@ -1,5 +1,6 @@
 package com.jonas.coronaalarm;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             "*Diese Nachricht wurde von “CallMyContacts - Corona Warnnachricht” verschickt*\n";
 
     ImageView imageButton;
+    Window window;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setup(){
         imageButton = findViewById(R.id.imageButton);
+        window = getWindow();
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-
+        window.setNavigationBarColor(R.color.trans);
         Glide.with(this)
                 .load(R.drawable.corona)
                 .into(imageButton);

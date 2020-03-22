@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".WelcomeActivity">
+    tools:context=".WelcomeActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView3"
