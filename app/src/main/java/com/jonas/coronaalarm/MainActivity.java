@@ -3,6 +3,7 @@ package com.jonas.coronaalarm;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+
+    SharedPreferences prefs = null;
 
     private static final String warningMessage = "*Automatisierte Warnnachricht* \n"+
             "\n"+
@@ -35,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("com.jonas.coronaalarm", MODE_PRIVATE);
+
+        if (prefs.getBoolean("firstrun", true)) {
+            prefs.edit().putBoolean("firstrun", false).apply();
+
+            Intent myIntent = new Intent(MainActivity.this, WelcomeActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        } 
 
         setup();
     }
