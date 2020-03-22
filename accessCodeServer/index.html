@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <title>CallMyContacts - Corona Warnnachricht</title>
 </head>
-<body>
-    Hier werden die Codes vergeben.<br><br>
-    <form action="/" method="post">
-        <label for="warningMessage">Zusätzliche Hinweise</label><br>
-            <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="In diesem Feld können Hinweise bezüglich der lokalen Umstände angegeben werden ..." cols="20" style="width: 30%; height: 100px;"></textarea><br><br>
-        <input type="submit" value="Generiere Zugangscode">
-    </form>
+<body style="background-color: #454545; margin: 0px; font-family: Verdana, Geneva, sans-serif;">
+    <div style="background-color: #f0efe9; position: relative; top: 10vh; height: 85vh; padding: 30px">
+        <div style="position: relative; left: 25%; width: 50%; height: 90%; background-color: white; padding-top: 50px">
 
-    <p id="accessCode"></p>
+            <h1 style="text-align: center">Zugriffscodes</h1>
+            <p style="text-align: center">Hier werden die Codes vergeben.<p></p><br><br>
+            <form action="/" method="post">
+                <label for="warningMessage" style="margin-left: 10%;">Zusätzliche Hinweise</label><br>
+                <textarea name="warningMessage" rows="2" id="warningMessage" placeholder="In diesem Feld können Hinweise bezüglich der lokalen Umstände angegeben werden ..." cols="20" style="margin-left: 10%; width: 80%; font-size: 16px; height: 170px;"></textarea><br><br>
+                <input type="submit" value="Generiere Zugangscode">
+            </form>
+
+            <p id="accessCode"></p>
+
+        </div>
+    </div>
 </body>
 </html>
