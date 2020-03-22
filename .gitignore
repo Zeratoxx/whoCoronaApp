@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 /accessCodeServer/conf.ini
+/accessCodeServer/accessCodes.xml
