@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         window = getWindow();
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-        window.setNavigationBarColor(R.color.trans);
         Glide.with(this)
                 .load(R.drawable.corona)
                 .into(imageButton);
@@ -71,12 +70,11 @@ public class MainActivity extends AppCompatActivity {
         try {
             Intent waIntent = new Intent(Intent.ACTION_SEND);
             waIntent.setType("text/plain");
-            String text = warningMessage;
 
             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
             waIntent.setPackage("com.whatsapp");
 
-            waIntent.putExtra(Intent.EXTRA_TEXT, text);
+            waIntent.putExtra(Intent.EXTRA_TEXT, warningMessage);
             startActivity(Intent.createChooser(waIntent, "Share with"));
 
         } catch (PackageManager.NameNotFoundException e) {
