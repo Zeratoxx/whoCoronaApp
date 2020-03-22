@@ -37,25 +37,39 @@ class Serv(BaseHTTPRequestHandler):
 
     def do_POST(self):
 
-        if self.path != "/":
+        xml_response = bytes("empty", 'utf-8')
+
+        if self.path == "/access_request":
+            content_length = int(self.headers['Content-Length'])
+            access_code = self.rfile.read(content_length).decode("utf-8")
+            content = get_access_code_entry(access_code)
+
+            if content == None:
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(bytes("The requested access code is invalid.", 'utf-8'))
+                return
+
+            xml_response = bytes(content, 'utf-8')
+
+        elif self.path != "/":
             self.send_response(404)
             self.end_headers()
             self.wfile.write(bytes("404:" + self.path + " does not exist or is not accessible by a POST request", 'utf-8'))
 
-        content_length = int(self.headers['Content-Length'])
-        body = self.rfile.read(content_length)
+        else:
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
 
-        fields = urlparse(body).path.decode("utf-8")
+            fields = urlparse(body).path.decode("utf-8")
 
-        xml_response = bytes("empty", 'utf-8')
-        if fields.startswith("warningMessage="):
-            content = fields[len("warningMessage="):]
-            rand = str(random.randrange(0, 100000, 1))
-            access_code = str(hash(content + rand))[-6:]
+            if fields.startswith("warningMessage="):
+                content = fields[len("warningMessage="):]
+                rand = str(random.randrange(0, 100000, 1))
+                access_code = str(hash(content + rand))[-6:]
 
-            store_new_code(access_code, content)
-            xml_response = bytes(response_string0 + access_code + response_string1, 'utf-8')
-
+                store_new_code(access_code, content)
+                xml_response = bytes(response_string0 + access_code + response_string1, 'utf-8')
 
         self.send_response(200)
         self.send_header("content-type", "text/html; charset=UTF-8")
@@ -67,10 +81,26 @@ def store_new_code(access_code, content):
     xml_code_list = ET.parse('accessCodes.xml')
     root_node = xml_code_list.getroot()
 
-    ET.SubElement(root_node, "accessCode", {'content': content, 'access_code': access_code})
+    ET.SubElement(root_node, 'tag_' + access_code, {'content': content})
     xml_code_list.write('accessCodes.xml')
 
 
-ip_address = sys.argv[1]
-httpd = HTTPServer((ip_address, 8080), Serv)
+def get_access_code_entry(access_code):
+    xml_code_list = ET.parse('accessCodes.xml')
+    root_node = xml_code_list.getroot()
+    access_code_node = root_node.find('tag_' + access_code)
+
+    if access_code_node == None:
+        return None
+
+    content = access_code_node.get('content')
+    root_node.remove(access_code_node)
+    xml_code_list.write('accessCodes.xml')
+
+    return content
+
+
+# ip_address = sys.argv[1]
+# httpd = HTTPServer((ip_address, 8080), Serv)
+httpd = HTTPServer(('localhost', 8080), Serv)
 httpd.serve_forever()
