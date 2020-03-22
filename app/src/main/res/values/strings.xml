@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CoronaAlarm</string>
+    <string name="click_me">Click Me!</string>
+    <string name="w_hle_nun_die_kontakte_die_du_warnen_m_chtest">Wähle nun die Kontakte, die du warnen möchtest ...</string>
+    <string name="die_app_soll_dich_in_diesen_schwierigen_zeiten_unterst_tzen_und_es_dir_erleichtern_deinen_bekanntenkreis_von_deinem_positiven_testergebnis_zu_warnen">Die App soll dich in diesen schwierigen Zeiten unterstützen und es dir erleichtern, deinen Bekanntenkreis von deinem positiven Testergebnis zu warnen.</string>
+    <string name="willkommen_zu_callmycontacs">Willkommen zu CallMyContacs!</string>
+    <string name="zugangscode">Zugangscode ...</string>
+    <string name="arrow">arrow</string>
+    <string name="modell_of_coronavirus">modell_of_coronavirus</string>
 </resources>
