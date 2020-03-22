@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import random
+import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
-import sys
 
 response_string0 = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>CallMyContacts - Corona Warnnachricht</title></head><body>Hier werden die Codes vergeben.<br><br><form action='/' method='post'><label for='warningMessage'>Zusätzliche Hinweise</label><br><textarea name='warningMessage' rows='2' id='warningMessage' placeholder='In diesem Feld können Hinweise bezüglich der lokalen Umstände gegeben werden ...' cols='20' style='width: 30%; height: 100px;'></textarea><br><br><input type='submit' value='Generiere Zugangscode'></form><p id='accessCode'>"
 response_string1 = "</p></body></html>"
@@ -42,7 +42,14 @@ class Serv(BaseHTTPRequestHandler):
         if self.path == "/access_request":
             content_length = int(self.headers['Content-Length'])
             access_code = self.rfile.read(content_length).decode("utf-8")
-            content = get_access_code_entry(access_code)
+
+            if not access_code.startswith("access_code="):
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(bytes("The requested access code is invalid.", 'utf-8'))
+                return
+
+            content = get_access_code_entry(access_code[len("access_code="):])
 
             if content == None:
                 self.send_response(404)
