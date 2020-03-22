@@ -100,7 +100,7 @@ def get_access_code_entry(access_code):
     return content
 
 
-# ip_address = sys.argv[1]
-# httpd = HTTPServer((ip_address, 8080), Serv)
-httpd = HTTPServer(('localhost', 8080), Serv)
+ip_address = sys.argv[1]
+httpd = HTTPServer((ip_address, 8080), Serv)
+# httpd = HTTPServer(('localhost', 8080), Serv)
 httpd.serve_forever()
